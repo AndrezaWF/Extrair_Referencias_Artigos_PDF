@@ -78,6 +78,27 @@ def localiza_ref(lista):
                                                 flag = "5. Referências \n" in lista
                                                 if flag == True:
                                                     pos = lista.index("5. Referências \n")
+                                                else:
+                                                    flag = "REFERENCES\n" in lista
+                                                    if flag == True:
+                                                        pos = lista.index("REFERENCES\n")
+                                                    else:
+                                                        flag = "REFER ˆENCIAS\n" in lista
+                                                        if flag == True:
+                                                            pos = lista.index("REFER ˆENCIAS\n")
+                                                        else:
+                                                            flag = "REFERˆENCIAS\n" in lista
+                                                            if flag == True:
+                                                                pos = lista.index("REFERˆENCIAS\n")
+                                                            else:
+                                                                flag = "REFERENCIAS BIBLIOGRÁFICAS\n" in lista
+                                                                if flag == True:
+                                                                    pos = lista.index("REFERENCIAS BIBLIOGRÁFICAS\n")
+                                                                else:
+                                                                    flag = "REFERENCIAS BIBLIOGRÁFICAS \n" in lista
+                                                                    if flag == True:
+                                                                        pos = lista.index("REFERENCIAS BIBLIOGRÁFICAS \n")
+                                                           
 
         
 
@@ -87,7 +108,7 @@ def localiza_ref(lista):
 
 def corrige_caracteres(lista2):
 
-        lista2 = [l.replace('c¸˜ao','ção') for l in lista2]  
+        lista2 = [l.replace('c¸˜ao','ção') for l in lista2] 
         lista2 = [l.replace('´a', 'á') for l in lista2]
         lista2 = [l.replace('´e','é') for l in lista2]
         lista2 = [l.replace('´i','í') for l in lista2]
@@ -97,6 +118,7 @@ def corrige_caracteres(lista2):
         lista2 = [l.replace('a´','á') for l in lista2]
         lista2 = [l.replace('e´','é') for l in lista2]
         lista2 = [l.replace('o´','ó') for l in lista2]
+        lista2 = [l.replace('`o','ó') for l in lista2]
         lista2 = [l.replace('u´','ú') for l in lista2]
         lista2 = [l.replace('ˆo','ô') for l in lista2]  
         lista2 = [l.replace('- ','') for l in lista2]
@@ -113,6 +135,7 @@ def corrige_caracteres(lista2):
         lista2 = [l.replace('¨o','ö') for l in lista2]
         lista2 = [l.replace('”','&quot;') for l in lista2]
         lista2 = [l.replace('“','&quot;') for l in lista2]
+        lista2 = [l.replace('"','&quot;') for l in lista2]
         lista2 = [l.replace('’','&apos;') for l in lista2]
         lista2 = [l.replace('ç ˜oes','ções') for l in lista2]
         lista2 = [l.replace('˜o','õ') for l in lista2]
@@ -120,8 +143,7 @@ def corrige_caracteres(lista2):
         lista2 = [l.replace('>','&gt;') for l in lista2]
         lista2 = [l.replace('<','&lt;') for l in lista2]
         lista2 = [l.replace('¸c˜o','çõ;') for l in lista2]
-        lista2 = [l.replace('"','&quot;') for l in lista2]
-        lista2 = [l.replace("'",'&apos;') for l in lista2]  
+        lista2 = [l.replace("'",'&apos;') for l in lista2]
         
         return ' '.join(lista2)
 
@@ -142,7 +164,7 @@ def main():
         #print(minha_string)
 
         lista = string.splitlines(keepends=True) #Transforma o arquivo em uma lista
-        #print(lista)
+        print(lista)
 
         lista2 = localiza_ref(lista) #Localiza a palavra referências na lista e retorna uma lista contendo as refs
         lista3 = corrige_caracteres(lista2) #Corrige caracteres e faz as substituições de <, >, &, ' e " pelos seus equivalentes em html.
@@ -152,7 +174,7 @@ def main():
         print("Criado o .txt contendo as refs do artigo "+nome+".\n")
         arquivo.close()
 
-        minha_string = ''
+        string = ''
         lista = ''
         lista2 = ''
         lista3 = ''
