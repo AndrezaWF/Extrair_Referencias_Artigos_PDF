@@ -1,6 +1,10 @@
 # SBC_OpenLib_Extrair_Refer-ncias_PDF
-Ferramenta para extração de referências de artigos em formato PDF
+PROGRAMA PARA EXTRAIR REFERÊNCIAS DOS PDFs: O programa lê o arquivo PDF e recorta as suas referências.
+É CRIADO UM TXT PARA ARMAZENAR AS REFS DE CADA ARTIGO
 
-É necessário instalar a biblioteca pdfminer.six
+É necessário instalar as bibliotecas pdfminer.six e pdfminer.py:  pip install pdfminer.six
+                                                                  pip install pdfminer.py
 
-Os artigos devem ser nomeados como 1.pdf, 2.pdf, 3.pdf,...
+Os artigos devem estar nomeados iniciando em 1. Por exemplo: 1.pdf, 2.pdf, 3.pdf, ...
+
+Os artigos em formato PDF devem estar dentro da mesma pasta deste programa.
