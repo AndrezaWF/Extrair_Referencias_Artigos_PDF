@@ -2,12 +2,9 @@
 andrezawf@gmail.com
 PROGRAMA PARA EXTRAIR REFERÊNCIAS DOS PDFs: O programa lê o arquivo PDF e recorta as suas referências.
 É CRIADO UM TXT PARA ARMAZENAR AS REFS DE CADA ARTIGO
-
 É necessário instalar as bibliotecas pdfminer.six e pdfminer.py:  pip install pdfminer.six
                                                                   pip install pdfminer.py
-
 Os artigos devem estar nomeados iniciando em 1. Por exemplo: 1.pdf, 2.pdf, 3.pdf, ...
-
 Os artigos em formato PDF devem estar dentro da mesma pasta deste programa.
 """
 
@@ -85,10 +82,13 @@ def localiza_ref(lista):
                                                 flag = "5. Referências \n" in lista
                                                 if flag == True:
                                                     indice_inicio_refs = lista.index("5. Referências \n")
-
+                                                else:
+                                                    flag = "7. Referências\n" in lista
+                                                    if flag == True:
+                                                        indice_inicio_refs = lista.index("7. Referências\n")
         
 
-        lista2 = lista[indice_inicio_refs+1:len(lista)]  #Gera uma nova lista contendo as referências
+        lista2 = lista[indice_inicio_refs+1:len(lista)]  #Gera uma nova lista contendo as referências  7. Referências\n
         return lista2
 
 
@@ -139,7 +139,7 @@ def corrige_caracteres(lista2):
 def main():
     print("________Os artigos devem estar nomeados iniciando em 1. Por exemplo: 1.pdf, 2.pdf, 3.pdf, ...________")
     print("\n")    
-    numero_de_artigos = int(input("Digite o número de artigos em PDF presentes na pasta:"))
+    numero_de_artigos = int(input("Digite o número de artigos PDF presentes na pasta:"))
     print("\n")
 
     for n in range(1, numero_de_artigos+1):
@@ -151,7 +151,7 @@ def main():
         texto_artigo = texto_art_bin.decode("utf-8", errors='ignore')  
     
         lista_completa = texto_artigo.splitlines(keepends=True) #Transforma o conteúdo do arquivo em uma lista
-        #print(lista_completa)
+        ###print(lista_completa)
 
         lista_de_refs = localiza_ref(lista_completa)            #Localiza a palavra referências na lista e retorna uma lista contendo refs
         
@@ -159,7 +159,7 @@ def main():
 
         arquivo = open(str(n)+'.txt', 'w', errors = 'ignore') 
         arquivo.write(lista_refs_corrigida)
-        print("****Criado o .txt contendo as refs do artigo**** "+nome_artigo+".\n")
+        print("****Criado o .txt contendo as refs do artigo "+nome_artigo+". ****\n")
         arquivo.close()
 
 
@@ -170,6 +170,3 @@ def main():
     print("________Referências extraídas.________")
 
 main()
-
-        
-					
