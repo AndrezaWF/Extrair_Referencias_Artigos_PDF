@@ -86,9 +86,13 @@ def localiza_ref(lista):
                                                     flag = "7. Referências\n" in lista
                                                     if flag == True:
                                                         indice_inicio_refs = lista.index("7. Referências\n")
+                                                    else:
+                                                        print("****Referências não encontradas.****\n")
+                                                        return False
+                                                          
         
 
-        lista2 = lista[indice_inicio_refs+1:len(lista)]  #Gera uma nova lista contendo as referências  7. Referências\n
+        lista2 = lista[indice_inicio_refs+1:len(lista)]  #Gera uma nova lista contendo as referências 
         return lista2
 
 
@@ -154,18 +158,30 @@ def main():
         ###print(lista_completa)
 
         lista_de_refs = localiza_ref(lista_completa)            #Localiza a palavra referências na lista e retorna uma lista contendo refs
+
+        if lista_de_refs == False:
+            arquivo = open(str(n)+'.txt', 'w', errors = 'ignore') 
+            arquivo.write("Referencias não encontradas.")
+            arquivo.close()
+
+
+            lista_completa = ''
+            lista_de_refs = ''
+            lista_refs_corrigida = ''
+
+        else:  
         
-        lista_refs_corrigida = corrige_caracteres(lista_de_refs) #Corrige caracteres e faz as substituições de <, >, &, ' e " pelos seus equivalentes em html.
+            lista_refs_corrigida = corrige_caracteres(lista_de_refs) #Corrige caracteres e faz as substituições de <, >, &, ' e " pelos seus equivalentes em html.
 
-        arquivo = open(str(n)+'.txt', 'w', errors = 'ignore') 
-        arquivo.write(lista_refs_corrigida)
-        print("****Criado o .txt contendo as refs do artigo "+nome_artigo+". ****\n")
-        arquivo.close()
+            arquivo = open(str(n)+'.txt', 'w', errors = 'ignore') 
+            arquivo.write(lista_refs_corrigida)
+            print("****Criado o .txt contendo as refs do artigo "+nome_artigo+". ****\n")
+            arquivo.close()
 
 
-        lista_completa = ''
-        lista_de_refs = ''
-        lista_refs_corrigida = ''
+            lista_completa = ''
+            lista_de_refs = ''
+            lista_refs_corrigida = ''
 
     print("________Referências extraídas.________")
 
