@@ -92,7 +92,7 @@ def localiza_ref(lista):
                                                           
         
 
-        lista2 = lista[indice_inicio_refs+1:len(lista)]  #Gera uma nova lista contendo as referências 
+        lista2 = lista[indice_inicio_refs+1:len(lista)]  #Gera uma nova lista contendo as referências  7. Referências\n
         return lista2
 
 
@@ -141,7 +141,9 @@ def corrige_caracteres(lista2):
     
 
 def main():
-    print("________Os artigos devem estar nomeados iniciando em 1. Por exemplo: 1.pdf, 2.pdf, 3.pdf, ...________")
+
+    cont = 0
+    print("\n________Os artigos devem estar nomeados iniciando em 1. Por exemplo: 1.pdf, 2.pdf, 3.pdf, ...________")
     print("\n")    
     numero_de_artigos = int(input("Digite o número de artigos PDF presentes na pasta:"))
     print("\n")
@@ -155,9 +157,9 @@ def main():
         texto_artigo = texto_art_bin.decode("utf-8", errors='ignore')  
     
         lista_completa = texto_artigo.splitlines(keepends=True) #Transforma o conteúdo do arquivo em uma lista
-        ###print(lista_completa)
 
         lista_de_refs = localiza_ref(lista_completa)            #Localiza a palavra referências na lista e retorna uma lista contendo refs
+
 
         if lista_de_refs == False:
             arquivo = open(str(n)+'.txt', 'w', errors = 'ignore') 
@@ -169,7 +171,13 @@ def main():
             lista_de_refs = ''
             lista_refs_corrigida = ''
 
-        else:  
+        else:
+
+            for elemento in lista_de_refs:
+                cont = cont+1
+                if elemento == "\n":
+                    lista_de_refs.pop(cont-1)
+        
         
             lista_refs_corrigida = corrige_caracteres(lista_de_refs) #Corrige caracteres e faz as substituições de <, >, &, ' e " pelos seus equivalentes em html.
 
@@ -182,6 +190,7 @@ def main():
             lista_completa = ''
             lista_de_refs = ''
             lista_refs_corrigida = ''
+            cont = 0
 
     print("________Referências extraídas.________")
 
