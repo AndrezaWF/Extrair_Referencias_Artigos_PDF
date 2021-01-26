@@ -87,8 +87,12 @@ def localiza_ref(lista):
                                                     if flag == True:
                                                         indice_inicio_refs = lista.index("7. Referências\n")
                                                     else:
-                                                        print("****Referências não encontradas.****\n")
-                                                        return False
+                                                        flag = "Referências \xa0\n" in lista
+                                                        if flag == True:
+                                                            indice_inicio_refs = lista.index("Referências \xa0\n")
+                                                        else:
+                                                            print("****Referências não encontradas.****\n")
+                                                            return False
                                                           
         
 
@@ -157,6 +161,7 @@ def main():
         texto_artigo = texto_art_bin.decode("utf-8", errors='ignore')  
     
         lista_completa = texto_artigo.splitlines(keepends=True) #Transforma o conteúdo do arquivo em uma lista
+        ##print(lista_completa)
 
         lista_de_refs = localiza_ref(lista_completa)            #Localiza a palavra referências na lista e retorna uma lista contendo refs
 
